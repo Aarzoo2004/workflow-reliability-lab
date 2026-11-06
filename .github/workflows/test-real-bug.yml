@@ -1,0 +1,13 @@
+name: Test - Real bug
+on: workflow_dispatch
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run unit tests
+        run: |
+          echo "Running unit tests..."
+          echo "FAIL tests/test_login.py::test_valid_login"
+          echo "AssertionError: expected status 200 but got 500"
+          exit 1
