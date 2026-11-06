@@ -1,0 +1,12 @@
+name: Test - Always timeout
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call external service
+        run: |
+          echo "Calling payments API..."
+          echo "Error: connect ETIMEDOUT 203.0.113.10:443 (request timed out)"
+          exit 1
