@@ -1,0 +1,16 @@
+name: Test - Flaky then fine
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download dependencies
+        run: |
+          echo "Run attempt: ${{ github.run_attempt }}"
+          if [ "${{ github.run_attempt }}" -lt 3 ]; then
+            echo "curl: (56) Recv failure: Connection reset by peer"
+            echo "ECONNRESET while downloading package"
+            exit 1
+          fi
+          echo "Download complete"
